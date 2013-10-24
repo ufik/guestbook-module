@@ -35,7 +35,6 @@ class SettingsPresenter extends BasePresenter {
 		$this->reloadContent();
 		
 		$this->template->config = $this->settings->getSection('guestbookModule');
-		$this->template->page = $this->page;
 		$this->template->idPage = $idPage;
 	}
 	
