@@ -3,6 +3,7 @@
 namespace WebCMS\GuestbookModule\Doctrine;
 
 use Doctrine\ORM\Mapping as orm;
+use Gedmo\Mapping\Annotation as gedmo;
 
 /**
  * Description of Post
@@ -32,7 +33,7 @@ class Post extends \AdminModule\Doctrine\Entity {
 	private $post;
 	
 	/**
-	 * @orm\Column(type="text")
+	 * @orm\Column(type="text", nullable=true)
 	 */
 	private $postResponse;
 	
@@ -41,6 +42,12 @@ class Post extends \AdminModule\Doctrine\Entity {
 	 * @orm\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $page;
+	
+	/**
+	 * @gedmo\Timestampable(on="create")
+	 * @orm\Column(type="datetime")
+	 */
+	private $date;
 	
 	public function getName() {
 		return $this->name;
@@ -80,5 +87,21 @@ class Post extends \AdminModule\Doctrine\Entity {
 
 	public function setPage($page) {
 		$this->page = $page;
+	}
+	
+	public function getPostResponse() {
+		return $this->postResponse;
+	}
+
+	public function getDate() {
+		return $this->date;
+	}
+
+	public function setPostResponse($postResponse) {
+		$this->postResponse = $postResponse;
+	}
+
+	public function setDate($date) {
+		$this->date = $date;
 	}
 }

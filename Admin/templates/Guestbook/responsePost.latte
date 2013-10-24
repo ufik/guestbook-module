@@ -1,0 +1,10 @@
+{block content}
+	{include ../tabs.latte active => 'page'}
+
+	<h1>{_'Response to'} {$post->getName()}</h1>
+	
+	{!$post->getPost()}
+	
+	{control responseForm}
+	
+{/block}

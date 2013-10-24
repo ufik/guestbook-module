@@ -9,7 +9,7 @@ namespace AdminModule\GuestbookModule;
  */
 class BasePresenter extends \AdminModule\BasePresenter {
 	
-	private $repository;
+	protected $repository;
 	
 	protected function startup() {
 		parent::startup();

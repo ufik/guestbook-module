@@ -27,7 +27,7 @@ class GuestbookPresenter extends \FrontendModule\BasePresenter{
 	public function actionDefault($id){
 		$this->posts = $this->repository->findBy(array(
 			'page' => $this->actualPage
-		));
+		), array('date' => 'DESC'));
 	}
 	
 	public function createComponentPostForm(){
@@ -41,23 +41,36 @@ class GuestbookPresenter extends \FrontendModule\BasePresenter{
 		$form->onSuccess[] = callback($this, 'postFormSubmitted');
 		$form->addSubmit('send');
 		
+		$form->addProtection();
+		
 		return $form;
 	}
 	
 	public function postFormSubmitted($form){
-		$values = $form;
+		$values = $form->getValues();
+
+		if(\WebCMS\SystemHelper::rpHash($_POST['real']) == $_POST['realHash']){
+			
+			$post = new \WebCMS\GuestbookModule\Doctrine\Post;
+			$post->setName($values->name);
+			$post->setEmail($values->email);
+			$post->setPhone($values->phone);
+			$post->setPost($values->post);
+			$post->setPage($this->actualPage);
+
+			$this->em->persist($post);
+			$this->em->flush();
+
+			$this->flashMessageTranslated('Your post has been saved. Thank you.', 'success');
+			$this->redirect('default', array(
+				'path' => $this->actualPage->getPath(),
+				'abbr' => $this->abbr
+			));
+			
+		}else{
+			$this->flashMessage($this->translation['Wrong protection code.'], 'danger');
+		}
 		
-		$post = new \WebCMS\GuestbookModule\Doctrine\Post;
-		$post->setName($values->name);
-		$post->setEmail($values->email);
-		$post->setPhone($values->phone);
-		$post->setPost($values->post);
-		$post->setPage($this->actualPage);
-		
-		$this->em->persist($post);
-		$this->em->flush();
-		
-		$this->flashMessageTranslated('Your post has been saved. Thank you.', 'success');
 	}
 	
 	public function renderDefault($id){
