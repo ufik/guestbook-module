@@ -1,4 +1,4 @@
-Guestbook module (page-module)
+Guestbook module (guestbook-module)
 =========================
 
 [![Total Downloads](https://poser.pugx.org/webcms2/guestbook-module/downloads.png)](https://packagist.org/packages/webcms2/guestbook-module)
