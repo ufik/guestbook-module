@@ -1,4 +1,43 @@
 {block #content}
 	<h1>{$actualPage->getTitle()}</h1>
 	
+	{form postForm}
+		
+		<div class="form-group">
+			{label name /}
+			{input name class => 'control-form'}
+		</div>
+		<div class="form-group">
+			{label email /}
+			{input email class => 'control-form'}
+		</div>
+		<div class="form-group">
+			{label phone /}
+			{input phone class => 'control-form'}
+		</div>
+		<div class="form-group">
+			{label post /}
+			{input post class => 'control-form'}
+		</div>
+		
+		<input id="real" type="text" name="real" />
+		
+		{input send class => 'btn btn-success'}
+		
+	{/form}
+	
+	{foreach $posts as $post}
+		<div>
+			{$post->getDate()->format('d.m.Y H:i:s')}
+			
+			{$post->getName()}
+			
+			{$post->getPost()}
+			
+			{if $post->getPostResponse()}
+				{!$post->getPostResponse()}
+			{/if}
+		</div>
+	{/foreach}
+	
 {/block}
