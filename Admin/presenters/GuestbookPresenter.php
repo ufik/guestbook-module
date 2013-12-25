@@ -80,7 +80,7 @@ class GuestbookPresenter extends BasePresenter {
 
 		$this->em->flush();
 
-		$this->flashMessage($this->translation['Post has been responsed.'], 'success');
+		$this->flashMessage('Post has been responsed.', 'success');
 
 		$this->redirect('default', array(
 			'idPage' => $this->actualPage->getId()
@@ -99,7 +99,7 @@ class GuestbookPresenter extends BasePresenter {
 		$this->em->remove($this->post);
 		$this->em->flush();
 		
-		$this->flashMessage($this->translation['Post has been removed.'], 'success');
+		$this->flashMessage('Post has been removed.', 'success');
 		$this->redirect('default', array(
 			'idPage' => $this->actualPage->getId()
 		));

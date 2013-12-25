@@ -61,14 +61,14 @@ class GuestbookPresenter extends \FrontendModule\BasePresenter{
 			$this->em->persist($post);
 			$this->em->flush();
 
-			$this->flashMessageTranslated('Your post has been saved. Thank you.', 'success');
+			$this->flashMessage('Your post has been saved. Thank you.', 'success');
 			$this->redirect('default', array(
 				'path' => $this->actualPage->getPath(),
 				'abbr' => $this->abbr
 			));
 			
 		}else{
-			$this->flashMessage($this->translation['Wrong protection code.'], 'danger');
+			$this->flashMessage('Wrong protection code.', 'danger');
 		}
 		
 	}
