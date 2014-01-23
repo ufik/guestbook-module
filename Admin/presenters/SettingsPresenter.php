@@ -27,6 +27,7 @@ class SettingsPresenter extends BasePresenter {
 	public function createComponentSettingsForm(){
 		
 		$settings = array();
+		$settings[] = $this->settings->get('Posts per page', 'guestbookModule' . $this->actualPage->getId(), 'text');
 		
 		return $this->createSettingsForm($settings);
 	}
