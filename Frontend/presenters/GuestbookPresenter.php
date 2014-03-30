@@ -70,7 +70,7 @@
 	public function postFormSubmitted($form) {
 	    $values = $form->getValues();
 
-	    if (\WebCMS\SystemHelper::rpHash($_POST['real']) == $_POST['realHash']) {
+	    if (\WebCMS\Helpers\SystemHelper::rpHash($_POST['real']) == $_POST['realHash']) {
 
 		$post = new \WebCMS\GuestbookModule\Doctrine\Post;
 		$post->setName($values->name);
